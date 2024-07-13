@@ -52,7 +52,6 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
 
   return (
     <div>
-      <div>{input}</div>
       <button onClick={sendMessage}>Send</button>
       <div>{isLoading ? "レシピを考え中..." : <ReactMarkdown>{message}</ReactMarkdown>}</div>
     </div>
