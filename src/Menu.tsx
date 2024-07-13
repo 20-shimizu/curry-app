@@ -9,7 +9,8 @@ const options = [
   { value: "鶏肉", label: "鶏肉"},
   { value: "にんじん", label: "にんじん"},
   { value: "じゃがいも", label: "じゃがいも"},
-  { value: "玉ねぎ", label: "玉ねぎ"}
+  { value: "玉ねぎ", label: "玉ねぎ"},
+  { value: "いちご", label: "いちご"}
 ]
 
 const Menu: React.FC<MenuProps> = ({setSelectedIngredients}) => {

@@ -39,25 +39,10 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
           }
         );
 
-        const botResponse = response.data;
-        let botMessageContent = "";
+        const responseContent = response.data.candidates[0].content;
+        const responseParts = responseContent.parts.map((part: Part) => part.text).join("\n");
 
-        if (
-          botResponse &&
-          botResponse.candidates &&
-          botResponse.candidates.length > 0
-        ) {
-          const firstCandidate = botResponse.candidates[0].content;
-          if (
-            firstCandidate &&
-            firstCandidate.parts &&
-            firstCandidate.parts.length > 0
-          ) {
-            botMessageContent = firstCandidate.parts.map((part: Part) => part.text).join("\n");
-          }
-        }
-
-        setMessage(botMessageContent);
+        setMessage(responseParts);
         setIsLoading(false);
       } catch (error) {
         console.error("Google API error:", error);
@@ -65,15 +50,11 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
     }
   };
 
-  const renderChatMessage = (message: string) => {
-    return <ReactMarkdown>{message}</ReactMarkdown>;
-  };
-
   return (
     <div>
+      <div>{input}</div>
       <button onClick={sendMessage}>Send</button>
-      <div>{isLoading ? "レシピを考え中..." : ""}</div>
-      <div>{renderChatMessage(message)}</div>
+      <div>{isLoading ? "レシピを考え中..." : <ReactMarkdown>{message}</ReactMarkdown>}</div>
     </div>
   )
 };
