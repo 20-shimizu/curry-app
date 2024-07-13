@@ -30,7 +30,7 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
         const response = await axios.post(
           `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${process.env.REACT_APP_GOOGLE_API_KEY}`,
           {
-            contents: [{ parts: [{text: input}]}],
+            contents: [{ parts: [{text: order}]}],
           },
           {
             headers: {
