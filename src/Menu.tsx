@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import "./Menu.css"
 import Select from "react-select";
 
 type MenuProps = {
@@ -31,17 +32,19 @@ const Menu: React.FC<MenuProps> = ({setSelectedIngredients}) => {
   }
 
   return (
-    <div>
-      <Select
+    <div className="container">
+      <Select className="select"
         isMulti
         options={options}
         onChange={handleChange}
       />
-      <input
-        value={inputText}
-        onChange={(event) => setInputText(event.target.value)}
-      />
-      <button onClick={addOptions}>追加</button>
+      <div className="inputContainer">
+        <input
+          value={inputText}
+          onChange={(event) => setInputText(event.target.value)}
+        />
+        <button onClick={addOptions}>追加</button>
+      </div>
     </div>
   );
 };

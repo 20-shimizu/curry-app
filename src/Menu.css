@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  flex-flow: row;
+}
+
+.select {
+  width: 70%;
+}
+.inputContainer {
+  display: flex;
+}
