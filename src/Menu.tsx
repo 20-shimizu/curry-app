@@ -1,17 +1,17 @@
 import React, { useState } from "react"
 import "./Menu.css"
-import Select from "react-select";
+import Select, { components, OptionProps } from "react-select";
 
 type MenuProps = {
   setSelectedIngredients: React.Dispatch<React.SetStateAction<string[]>>;
 }
-type Ingredient = {
+type OptionType = {
   value: string;
   label: string;
 }
 
 const Menu: React.FC<MenuProps> = ({setSelectedIngredients}) => {
-  const [options, setOptions] = useState<Ingredient[]>([
+  const [options, setOptions] = useState<OptionType[]>([
     { value: "鶏肉", label: "鶏肉"},
     { value: "にんじん", label: "にんじん"},
     { value: "じゃがいも", label: "じゃがいも"},
@@ -26,9 +26,28 @@ const Menu: React.FC<MenuProps> = ({setSelectedIngredients}) => {
 
   const addOptions = () => {
     const newIngredient = { value: inputText, label: inputText};
-    const newOptions = [...options, newIngredient];
-    setOptions(newOptions);
+    setOptions((prevOptions) => [...prevOptions, newIngredient]);
     setInputText("");
+  }
+
+  const deleteOptions = (optionToDelete: OptionType) => {
+    setOptions((prevOptions) => prevOptions.filter((option) => option.value !== optionToDelete.value));
+  }
+
+  const customOption = (props: OptionProps<OptionType>) => {
+    return (
+      <components.Option {...props}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span>{props.data.label}</span>
+          <button onClick={(e) => {
+            e.stopPropagation();
+            deleteOptions(props.data);
+          }}>
+            削除
+          </button>
+        </div>
+      </components.Option>
+    )
   }
 
   return (
@@ -37,6 +56,7 @@ const Menu: React.FC<MenuProps> = ({setSelectedIngredients}) => {
         isMulti
         options={options}
         onChange={handleChange}
+        components={{ Option: customOption }}
       />
       <div className="inputContainer">
         <input
