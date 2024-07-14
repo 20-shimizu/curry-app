@@ -1,29 +1,48 @@
-import React from "react"
+import React, { useState } from "react"
 import Select from "react-select";
 
 type MenuProps = {
   setSelectedIngredients: React.Dispatch<React.SetStateAction<string[]>>;
 }
-
-const options = [
-  { value: "鶏肉", label: "鶏肉"},
-  { value: "にんじん", label: "にんじん"},
-  { value: "じゃがいも", label: "じゃがいも"},
-  { value: "玉ねぎ", label: "玉ねぎ"},
-  { value: "いちご", label: "いちご"}
-]
+type Ingredient = {
+  value: string;
+  label: string;
+}
 
 const Menu: React.FC<MenuProps> = ({setSelectedIngredients}) => {
+  const [options, setOptions] = useState<Ingredient[]>([
+    { value: "鶏肉", label: "鶏肉"},
+    { value: "にんじん", label: "にんじん"},
+    { value: "じゃがいも", label: "じゃがいも"},
+    { value: "玉ねぎ", label: "玉ねぎ"},
+    { value: "いちご", label: "いちご"}]);
+  const [inputText, setInputText] = useState("");
+
   const handleChange = (ingredients: any) => {
     const selectedIngredients = ingredients ? ingredients.map((ing: any) => ing.value) : [];
     setSelectedIngredients(selectedIngredients);
   }
+
+  const addOptions = () => {
+    const newIngredient = { value: inputText, label: inputText};
+    const newOptions = [...options, newIngredient];
+    setOptions(newOptions);
+    setInputText("");
+  }
+
   return (
-    <Select
-      isMulti
-      options={options}
-      onChange={handleChange}
-    />
+    <div>
+      <Select
+        isMulti
+        options={options}
+        onChange={handleChange}
+      />
+      <input
+        value={inputText}
+        onChange={(event) => setInputText(event.target.value)}
+      />
+      <button onClick={addOptions}>追加</button>
+    </div>
   );
 };
 
