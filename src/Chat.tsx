@@ -23,8 +23,9 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
       let order = "以下の食材を全て使ったカレーのレシピを1つ作成し、考えてください。\n";
       let output_order = "ただし、出力の際には、まず特徴的でカレーを含むタイトルをそのタイトルだけで表示し、続けて材料を箇条書きで示し、作り方を示し、ポイントを箇条書きで述べよ。"
       selectedIngredients.map((ing) => {
-        order = order + ing + "\n"+ output_order + "\n";
+        order = order + ing + "\n";
       })
+      order = order + output_order + "\n";
       setInput(order);
       setIsLoading(true);
       try {
