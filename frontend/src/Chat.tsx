@@ -16,6 +16,8 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
   const [message, setMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
 
+  
+
   const sendMessage = async () => {
     if (selectedIngredients.length == 0) {
       setMessage("食材を選択してください");
@@ -45,12 +47,28 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
         const responseParts = responseContent.parts.map((part: Part) => part.text).join("\n");
 
         setMessage(responseParts);
+
+        
+
+        
+
         setIsLoading(false);
       } catch (error) {
         console.error("Google API error:", error);
       }
     }
   };
+
+  //messageを**\nによって分割する
+  const message_list = message.split("\n**");
+  //message_listの各要素の先頭に**を追加する
+
+  message_list.forEach((value, index) => {
+    message_list[index] = "**" + value;
+  });
+  
+  //title: タイトル, ingredients: 材料, how_to_make: 作り方, point: ポイント
+  const [title, ingredients, how_to_make, point] = message_list;
 
   return (
     <div>
