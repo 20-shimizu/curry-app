@@ -67,12 +67,13 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
     message_list[index] = "**" + value;
   });
   
+  //title: タイトル, ingredients: 材料, how_to_make: 作り方, point: ポイント
   const [title, ingredients, how_to_make, point] = message_list;
 
   return (
     <div>
       <button onClick={sendMessage}>Send</button>
-      <div>{isLoading ? "レシピを考え中..." : <ReactMarkdown>{ingredients}</ReactMarkdown>}</div>
+      <div>{isLoading ? "レシピを考え中..." : <ReactMarkdown>{message}</ReactMarkdown>}</div>
     </div>
   )
 };
