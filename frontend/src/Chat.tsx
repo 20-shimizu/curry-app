@@ -2,9 +2,16 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
+import { injectGlobal } from "@emotion/css";
 
 type ChatProps = {
   selectedIngredients: string[];
+}
+type DataType = {
+  title: string;
+  ingredients: string;
+  how_to_make: string;
+  point: string;
 }
 
 interface Part {
@@ -15,8 +22,6 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
   const [input, setInput] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
-
-  
 
   const sendMessage = async () => {
     if (selectedIngredients.length == 0) {
@@ -47,11 +52,6 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
         const responseParts = responseContent.parts.map((part: Part) => part.text).join("\n");
 
         setMessage(responseParts);
-
-        
-
-        
-
         setIsLoading(false);
       } catch (error) {
         console.error("Google API error:", error);
@@ -62,17 +62,38 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
   //messageを**\nによって分割する
   const message_list = message.split("\n**");
   //message_listの各要素の先頭に**を追加する
-
   message_list.forEach((value, index) => {
-    message_list[index] = "**" + value;
+    if (index != 0) message_list[index] = "**" + value;
   });
-  
+
   //title: タイトル, ingredients: 材料, how_to_make: 作り方, point: ポイント
   const [title, ingredients, how_to_make, point] = message_list;
 
+  const addRecipe = () => {
+    const data: DataType = {
+      title: title,
+      ingredients: ingredients,
+      how_to_make: how_to_make,
+      point: point
+    };
+    try {
+      fetch('/recipes/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+    } catch (error) {
+      console.error('エラー:', error);
+    }
+  };
+
+
   return (
     <div>
-      <button onClick={sendMessage}>Send</button>
+      <button onClick={sendMessage}>レシピを生成</button>
+      <div>{!isLoading && message != "" ? <button onClick={addRecipe}>レシピを保存</button> : null }</div>
       <div>{isLoading ? "レシピを考え中..." : <ReactMarkdown>{message}</ReactMarkdown>}</div>
     </div>
   )

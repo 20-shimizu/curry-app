@@ -12,6 +12,7 @@
 - ```npm install -g nodemon```
 - ```npm install mysql2```
 - ```npm install dotenv```
+- ```npm install body-parser```
 - .envファイルを作成し、　```DB_PASSWORD={mysql password}```　を追加 ( {mysql password} にはmysqlに登録したパスワードを入れる)
   - 例:```DB_PASSWORD=ABCDEFG```
 ### curry-app/frontend/での操作
