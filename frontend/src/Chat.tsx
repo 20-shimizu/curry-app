@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import { injectGlobal } from "@emotion/css";
+import "./Chat.css"
 
 type ChatProps = {
   selectedIngredients: string[];
@@ -23,9 +24,11 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
   const [message, setMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const errorMessage = "食材を選択してください";
+
   const sendMessage = async () => {
     if (selectedIngredients.length == 0) {
-      setMessage("食材を選択してください");
+      setMessage(errorMessage);
     } else {
       let order = "以下の食材を全て使ったカレーのレシピを1つ作成し、考えてください。\n";
       let output_order = "ただし、出力の際には、まず特徴的でカレーを含むタイトルをそのタイトルだけで表示し、続けて材料を箇条書きで示し、作り方を示し、ポイントを箇条書きで述べよ。"
@@ -91,9 +94,9 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
 
 
   return (
-    <div>
+    <div className="message">
       <button onClick={sendMessage}>レシピを生成</button>
-      <div>{!isLoading && message != "" ? <button onClick={addRecipe}>レシピを保存</button> : null }</div>
+      <div>{!isLoading && message != "" && message != errorMessage ? <button onClick={addRecipe}>レシピを保存</button> : null }</div>
       <div>{isLoading ? "レシピを考え中..." : <ReactMarkdown>{message}</ReactMarkdown>}</div>
     </div>
   )

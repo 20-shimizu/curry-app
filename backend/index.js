@@ -1,4 +1,4 @@
-// 想定データベース構成
+// データベース構成
 // (database)   (tables)   (data)
 // curry      | recipes  | id : INT
 //            |          | title : TEXT

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import "./Recipes.css"
 
 type DataType = {
   id: number;
@@ -30,7 +31,7 @@ const Recipes = () => {
   }, []);
 
   return (
-    <div>
+    <div className="recipes">
       <h3>保存済みレシピ</h3>
       <p>{dataList.map(data =>
         <p>{data.id},{data.title}</p>
