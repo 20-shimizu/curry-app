@@ -10,6 +10,7 @@
 ### curry-app/での操作
 - ```npm install express```
 - ```npm install -g nodemon```
+- (Unix/Linux/macOS)の場合sudoを使う```sudo npm install -g nodemon```
 - ```npm install mysql2```
 - ```npm install dotenv```
 - .envファイルを作成し、　```DB_PASSWORD={mysql password}```　を追加 ( {mysql password} にはmysqlに登録したパスワードを入れる)
