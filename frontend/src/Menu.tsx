@@ -52,20 +52,23 @@ const Menu: React.FC<MenuProps> = ({setSelectedIngredients}) => {
 
   return (
     <div className="container">
+      <button className="recipe-button">レシピを検索</button>
       <Select className="select"
         isMulti
         options={options}
         onChange={handleChange}
         components={{ Option: customOption }}
       />
-      <div className="inputContainer">
+      <div className="add-input">
         <input
           value={inputText}
           onChange={(event) => setInputText(event.target.value)}
+          style={{padding:'10px'}}
         />
-        <button onClick={addOptions}>追加</button>
       </div>
-    </div>
+        <button onClick={addOptions} className="add-button">追加</button>
+      </div>
+    
   );
 };
 

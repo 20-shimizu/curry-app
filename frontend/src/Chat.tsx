@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
+import "./Chat.css"
 
 type ChatProps = {
   selectedIngredients: string[];
@@ -48,13 +49,10 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
 
         setMessage(responseParts);
 
-        
-
-        
-
         setIsLoading(false);
       } catch (error) {
         console.error("Google API error:", error);
+
       }
     }
   };
@@ -72,8 +70,10 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
 
   return (
     <div>
-      <button onClick={sendMessage}>Send</button>
-      <div>{isLoading ? "レシピを考え中..." : <ReactMarkdown>{message}</ReactMarkdown>}</div>
+      <button onClick={sendMessage} className="icon-button"><span className="icon">&#128269;</span></button>
+      <div className="chat-container">
+      <div className="chat-content">{isLoading ? "レシピを考え中..." : <ReactMarkdown>{message}</ReactMarkdown>}</div>
+      </div>
     </div>
   )
 };

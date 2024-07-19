@@ -1,0 +1,30 @@
+.icon-button  {
+  background-color: #6B4F33;
+  color: white;
+  border: none;
+  padding: 20px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.icon-button:hover{
+  background-color: #a52a2a;
+}
+
+
+.chat-container {
+    background: url('../public/vbk.png')  center center;/*no-repeat*/
+    /*background-size: cover;*/
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    max-width: 90%;
+    min-height: 400px;
+}
+
+.chat-content {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+}
