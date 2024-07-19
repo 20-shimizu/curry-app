@@ -72,7 +72,7 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
   //title: タイトル, ingredients: 材料, how_to_make: 作り方, point: ポイント
   const [title, ingredients, how_to_make, point] = message_list;
 
-  const addRecipe = () => {
+  const addRecipe = async () => {
     const data: DataType = {
       title: title,
       ingredients: ingredients,
@@ -80,13 +80,8 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
       point: point
     };
     try {
-      fetch('/recipes/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
+      await axios.post('/recipes/add', data);
+      console.log("addbutton");
     } catch (error) {
       console.error('エラー:', error);
     }

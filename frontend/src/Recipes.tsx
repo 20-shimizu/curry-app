@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react"
 import "./Recipes.css"
+import axios from "axios";
+
+axios.defaults.timeout = 5000;
 
 type DataType = {
   id: number;
@@ -14,9 +17,8 @@ const Recipes = () => {
 
   const getDataList = async () => {
     try {
-      const response = await fetch('/recipes');
-      const data = await response.json();
-      setDataList(data);
+      const response = await axios.get('/recipes');
+      setDataList(response.data);
     } catch (error) {
       console.error('エラー:', error);
     }
@@ -26,16 +28,31 @@ const Recipes = () => {
     getDataList();
     const interval = setInterval(() => {
       getDataList();
-    }, 1000);
+    }, 500);
     return () => clearInterval(interval);
   }, []);
+
+  const deleteData = async (id: number) => {
+    const data = {
+      id: id
+    };
+    try {
+      const response = await axios.delete('/recipes/delete', {data});
+      setDataList(response.data);
+    } catch (error) {
+      console.error('エラー:', error);
+    }
+  };
 
   return (
     <div className="recipes">
       <h3>保存済みレシピ</h3>
-      <p>{dataList.map(data =>
-        <p>{data.id},{data.title}</p>
-      )}</p>
+      <div>{dataList.map(data =>
+        <p key={data.id}>
+          {data.id},{data.title}
+          <span style={{ float: 'right' }}><button onClick={() => deleteData(data.id)}>削除</button></span>
+        </p>
+      )}</div>
     </div>
   )
 };
