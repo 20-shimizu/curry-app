@@ -38,3 +38,16 @@
   padding: 10px;
   margin: 0 5px;
 }
+
+.icon-button  {
+  background-color: #6B4F33;
+  color: white;
+  border: none;
+  padding: 20px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.icon-button:hover{
+  background-color: #a52a2a;
+}

@@ -5,12 +5,12 @@ import { useState } from "react";
 import "./App.css"
 
 function App() {
-  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
+  const [response, setResponse] = useState<string>("");
   return (
     <div>
-      <Menu setSelectedIngredients={setSelectedIngredients} />
+      <Menu setResponse={setResponse} />
       {/* <div className="container"> */}
-        <Chat selectedIngredients={selectedIngredients} />
+        <Chat response={response} />
         {/* <Recipes /> */}
       {/* </div> */}
     </div>

@@ -6,7 +6,7 @@ import { injectGlobal } from "@emotion/css";
 import "./Chat.css"
 
 type ChatProps = {
-  selectedIngredients: string[];
+  response: string;
 }
 type DataType = {
   title: string;
@@ -15,58 +15,11 @@ type DataType = {
   point: string;
 }
 
-interface Part {
-  text: string;
-}
-
-const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
-  const [input, setInput] = useState<string>("");
+const Chat: React.FC<ChatProps> = ({response}) => {
   const [message, setMessage] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const errorMessage = "食材を選択してください";
-
-  const sendMessage = async () => {
-    if (selectedIngredients.length == 0) {
-      setMessage(errorMessage);
-    } else {
-      let order = "以下の食材を全て使ったカレーのレシピを1つ作成し、考えてください。\n";
-      let output_order = "ただし、出力の際には、まず特徴的でカレーを含むタイトルをそのタイトルだけで表示し、続けて材料を箇条書きで示し、作り方を示し、ポイントを箇条書きで述べよ。"
-      selectedIngredients.map((ing) => {
-        order = order + ing + "\n";
-      })
-      order = order + output_order + "\n";
-      setInput(order);
-      setIsLoading(true);
-      try {
-        const response = await axios.post(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${process.env.REACT_APP_GOOGLE_API_KEY}`,
-          {
-            contents: [{ parts: [{text: order}]}],
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            timeout: 100000
-          }
-        );
-
-        const responseContent = response.data.candidates[0].content;
-        const responseParts = responseContent.parts.map((part: Part) => part.text).join("\n");
-
-        setMessage(responseParts);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Google API error:", error);
-
-      }
-    }
-  };
 
   //messageを**\nによって分割する
-  const message_list = message.split("\n**");
+  const message_list = response.split("\n**");
   //message_listの各要素の先頭に**を追加する
   message_list.forEach((value, index) => {
     if (index != 0) message_list[index] = "**" + value;
@@ -90,12 +43,10 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
     }
   };
 
-
   return (
     <div>
-      <button onClick={sendMessage} className="icon-button"><span className="icon">&#128269;</span></button>
       <div className="chat-container">
-      <div className="chat-content">{isLoading ? "レシピを考え中..." : <ReactMarkdown>{message}</ReactMarkdown>}</div>
+      <div className="chat-content">{response[0] == '*' ? <ReactMarkdown>{response}</ReactMarkdown> : response}</div>
       </div>
     </div>
   )
