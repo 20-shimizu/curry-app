@@ -56,9 +56,11 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
         const responseParts = responseContent.parts.map((part: Part) => part.text).join("\n");
 
         setMessage(responseParts);
+
         setIsLoading(false);
       } catch (error) {
         console.error("Google API error:", error);
+
       }
     }
   };
@@ -90,10 +92,11 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
 
 
   return (
-    <div className="message">
-      <button onClick={sendMessage}>レシピを生成</button>
-      <div>{!isLoading && message != "" && message != errorMessage ? <button onClick={addRecipe}>レシピを保存</button> : null }</div>
-      <div>{isLoading ? "レシピを考え中..." : <ReactMarkdown>{message}</ReactMarkdown>}</div>
+    <div>
+      <button onClick={sendMessage} className="icon-button"><span className="icon">&#128269;</span></button>
+      <div className="chat-container">
+      <div className="chat-content">{isLoading ? "レシピを考え中..." : <ReactMarkdown>{message}</ReactMarkdown>}</div>
+      </div>
     </div>
   )
 };

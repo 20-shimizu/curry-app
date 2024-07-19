@@ -9,10 +9,10 @@ function App() {
   return (
     <div>
       <Menu setSelectedIngredients={setSelectedIngredients} />
-      <div className="container">
+      {/* <div className="container"> */}
         <Chat selectedIngredients={selectedIngredients} />
-        <Recipes />
-      </div>
+        {/* <Recipes /> */}
+      {/* </div> */}
     </div>
   );
 };

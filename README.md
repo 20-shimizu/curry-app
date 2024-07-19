@@ -11,6 +11,7 @@
 ### curry-app/での操作
 - ```npm install express```
 - ```npm install -g nodemon```
+- (Unix/Linux/macOS)の場合sudoを使う```sudo npm install -g nodemon```
 - ```npm install mysql2```
 - ```npm install dotenv```
 - ```npm install body-parser```
