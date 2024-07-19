@@ -1,3 +1,11 @@
 .recipes {
   flex: 1;
+  display: flex;
+  flex-flow: column;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

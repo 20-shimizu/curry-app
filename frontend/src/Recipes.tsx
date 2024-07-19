@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import ReactMarkdown from "react-markdown";
 import "./Recipes.css"
 import axios from "axios";
 
@@ -48,10 +49,10 @@ const Recipes = () => {
     <div className="recipes">
       <h3>保存済みレシピ</h3>
       <div>{dataList.map(data =>
-        <p key={data.id}>
-          {data.id},{data.title}
-          <span style={{ float: 'right' }}><button onClick={() => deleteData(data.id)}>削除</button></span>
-        </p>
+        <div key={data.id} className="list">
+          <ReactMarkdown>{data.title}</ReactMarkdown>
+          <button onClick={() => deleteData(data.id)}>削除</button>
+        </div>
       )}</div>
     </div>
   )

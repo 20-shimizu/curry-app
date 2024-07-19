@@ -48,6 +48,7 @@ const Chat: React.FC<ChatProps> = ({selectedIngredients}) => {
             headers: {
               "Content-Type": "application/json",
             },
+            timeout: 100000
           }
         );
 
