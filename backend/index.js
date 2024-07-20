@@ -53,7 +53,7 @@ app.post('/recipes/add', (req,res) => {
     const how_to_make = req.body.how_to_make;
     const point = req.body.point;
     const image_path = req.body.image_path;
-    client.query('insert into recipes(title, ingredients, how_to_make, point) values(?, ?, ?, ?, ?)', [title, ingredients, how_to_make, point, image_path], (err, result) => {
+    client.query('insert into recipes(title, ingredients, how_to_make, point, image_path) values(?, ?, ?, ?, ?)', [title, ingredients, how_to_make, point, image_path], (err, result) => {
         if (err) {
             console.error('add error into recipe table');
             throw err;
