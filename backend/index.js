@@ -5,6 +5,7 @@
 //            |          | ingredients : TEXT
 //            |          | how_to_make : TEXT
 //            |          | point : TEXT
+//            |          | image_path : TEXT
 
 const express = require('express');
 const mysql = require('mysql2');
@@ -51,7 +52,8 @@ app.post('/recipes/add', (req,res) => {
     const ingredients = req.body.ingredients;
     const how_to_make = req.body.how_to_make;
     const point = req.body.point;
-    client.query('insert into recipes(title, ingredients, how_to_make, point) values(?, ?, ?, ?)', [title, ingredients, how_to_make, point], (err, result) => {
+    const image_path = req.body.image_path;
+    client.query('insert into recipes(title, ingredients, how_to_make, point) values(?, ?, ?, ?, ?)', [title, ingredients, how_to_make, point, image_path], (err, result) => {
         if (err) {
             console.error('add error into recipe table');
             throw err;
