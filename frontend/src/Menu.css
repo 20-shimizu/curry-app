@@ -5,7 +5,7 @@
 }
 
 .select {
-  width: 50%;
+  width: 40%;
   padding: 10px;
   margin: 0 5px;
 }
@@ -18,9 +18,8 @@
   background-color: #6B4F33;
   color: white;
   border: none;
-  padding: 15px 20px;
+  padding: 20px 20px;
   margin: 5px;
-  cursor: pointer;
   border-radius: 5px;
   text-align: center; /* Center text alignment */
   display: inline-block; /* Ensure the button is inline */

@@ -26,7 +26,6 @@
   border: none;
   padding: 15px 20px;
   margin: 5px;
-  cursor: pointer;
   border-radius: 5px;
   text-align: center; /* Center text alignment */
   display: inline-block; /* Ensure the button is inline */
@@ -66,9 +65,10 @@
 }
 
 .delete-button {
-  background-color: #B22222;
+  background-color: #ac3838;
   color: #fff;
-  border: none;
+  border: 0.5px solid white;
   padding: 5px 10px;
   cursor: pointer;
+  border-radius: 5px;
 }
