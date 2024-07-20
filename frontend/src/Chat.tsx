@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
@@ -53,6 +53,10 @@ const toggleSaveRecipe = async () => {
       }
     }
   };
+
+  useEffect(() => {
+    setIsSaved(false);
+  }, [response]);
 
   return (
     <div>
