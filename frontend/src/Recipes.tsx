@@ -12,9 +12,13 @@ type DataType = {
   ingredients: string;
   how_to_make: string;
   point: string;
+  image_path: string;
+}
+type RecipesProps = {
+  setSelectedRecipe: React.Dispatch<React.SetStateAction<DataType>>;
 }
 
-const Recipes = () => {
+const Recipes: React.FC<RecipesProps> = ({setSelectedRecipe}) => {
   const [dataList, setDataList] = useState<DataType[]>([]);
 
   const getDataList = async () => {
@@ -60,6 +64,7 @@ const Recipes = () => {
             <img src={`${process.env.PUBLIC_URL}/vbk.png`} alt="カレー" className="recipe-image" />
             <ReactMarkdown className="recipe-title">{data.title}</ReactMarkdown>
             <button onClick={() => deleteData(data.id)} className="delete-button">削除</button>
+            <Link to="/recipe"><button onClick={() => setSelectedRecipe(data)} className="delete-button">詳細</button></Link>
           </div>
         ))}
       </div>
