@@ -12,6 +12,7 @@ type DataType = {
   ingredients: string;
   how_to_make: string;
   point: string;
+  image_path: string;
 }
 
 const Chat: React.FC<ChatProps> = ({response,img_url}) => {
@@ -27,6 +28,8 @@ const Chat: React.FC<ChatProps> = ({response,img_url}) => {
 
   //title: タイトル, ingredients: 材料, how_to_make: 作り方, point: ポイント
   const [title, ingredients, how_to_make, point] = message_list;
+  //image_path: 画像の保存先のパス
+  const image_path = "image_path";
 
 
 const toggleSaveRecipe = async () => {
@@ -34,7 +37,8 @@ const toggleSaveRecipe = async () => {
       title: title,
       ingredients: ingredients,
       how_to_make: how_to_make,
-      point: point
+      point: point,
+      image_path: image_path
     };
     if (response[0] == "*") {
       try {
