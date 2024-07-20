@@ -50,7 +50,9 @@ const Recipes = () => {
     <div className="recipes">
       <div className="list">
         <h3>保存済みレシピ</h3>
-        <Link to="/"><button className="recipesSearch-button">レシピ検索</button></Link>
+        <Link to="/" >
+        <button className="recipesSearch-button">レシピ検索</button>
+        </Link>
       </div>
       <div className="recipe-list">
         {dataList.map(data => (

@@ -12,20 +12,32 @@
   text-align: center;
 }
 
-.recipesSearch-button{
-  font-weight: 900;
-  background-color: #6B4F33;
-  color: white;
-  border: none;
-  padding: 0px 20px;
-  margin: 5px;
-  cursor: pointer;
-  border-radius: 5px;
-}
 .recipesSearch-button:hover{
   background-color: #a52a2a;
 }
 
+
+.recipesSearch-button {
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 900;
+  background-color: #6B4F33;
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center; /* Center text alignment */
+  display: inline-block; /* Ensure the button is inline */
+  text-decoration: none; /* Remove any text decoration from link */
+}
+
+/* Ensure the Link doesn't affect button styling */
+.recipesSearch-button a {
+  text-decoration: none;
+  color: inherit;
+}
 
 .recipe-list {
   display: flex;
