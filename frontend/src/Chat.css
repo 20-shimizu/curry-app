@@ -14,35 +14,31 @@
     padding: 20px;
     border-radius: 10px;
 }
-.heart-button {
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: white;
-    margin-top: 10px;
-  }
-.heart-button.saved {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: red;
-  margin-top: 10px;
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px; 
 }
 .red-heart {
   background: none;
+  background-image: url('../public/redheart.png');
+  background-size: cover;
+  background-repeat: no-repeat;
   border: none;
-  font-size: 2rem;
+  padding: 0;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
-  color: red;
-  margin-top: 10px;
 }
 .white-heart {
   background: none;
+  background-image: url('../public/whiteheart.png');
+  background-size: cover;
+  background-repeat: no-repeat;
   border: none;
-  font-size: 2rem;
+  padding: 0;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
-  color: white;
-  margin-top: 10px;
 }

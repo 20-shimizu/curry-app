@@ -58,7 +58,9 @@ const toggleSaveRecipe = async () => {
     <div>
       <div className="chat-container">
       {/* <button className={`heart-button ${isSaved ? 'saved' : ''}`} onClick={toggleSaveRecipe}>❤️</button> */}
-      <button className={isSaved?"red-heart":"white-heart"} onClick={toggleSaveRecipe}>❤️</button>
+      <div className="button-container">
+      <button className={isSaved?"red-heart":"white-heart"} onClick={toggleSaveRecipe}/>
+      </div>
       <div className="chat-content">{response[0] === '*' ? <ReactMarkdown>{response}</ReactMarkdown> : response}</div>
       </div>
     </div>
