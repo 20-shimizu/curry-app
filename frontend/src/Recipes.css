@@ -8,4 +8,55 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 10px;
+  text-align: center;
+}
+
+.recipesSearch-button{
+  font-weight: 900;
+  background-color: #6B4F33;
+  color: white;
+  border: none;
+  padding: 0px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.recipesSearch-button:hover{
+  background-color: #a52a2a;
+}
+
+
+.recipe-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.recipe-item {
+  width: 200px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.recipe-image {
+  width: 100%;
+  height: auto;
+}
+
+.recipe-title {
+  margin: 10px 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.delete-button {
+  background-color: #B22222;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
 }

@@ -50,16 +50,19 @@ const Recipes = () => {
     <div className="recipes">
       <div className="list">
         <h3>保存済みレシピ</h3>
-        <Link to="/"><button>レシピ検索</button></Link>
+        <Link to="/"><button className="recipesSearch-button">レシピ検索</button></Link>
       </div>
-      <div>{dataList.map(data =>
-        <div key={data.id} className="list">
-          <ReactMarkdown>{data.title}</ReactMarkdown>
-          <button onClick={() => deleteData(data.id)}>削除</button>
-        </div>
-      )}</div>
+      <div className="recipe-list">
+        {dataList.map(data => (
+          <div key={data.id} className="recipe-item">
+            <img src={`${process.env.PUBLIC_URL}/vbk.png`} alt="カレー" className="recipe-image" />
+            <ReactMarkdown className="recipe-title">{data.title}</ReactMarkdown>
+            <button onClick={() => deleteData(data.id)} className="delete-button">削除</button>
+          </div>
+        ))}
+      </div>
     </div>
-  )
+  );
 };
 
 export default Recipes;
