@@ -6,6 +6,7 @@ import axios from "axios";
 
 type MenuProps = {
   setResponse: React.Dispatch<React.SetStateAction<string>>;
+  setImgUrl: React.Dispatch<React.SetStateAction<string>>;
 }
 type OptionType = {
   value: string;
@@ -15,7 +16,14 @@ interface Part {
   text: string;
 }
 
-const Menu: React.FC<MenuProps> = ({setResponse}) => {
+type DataType = {
+  title: string;
+  ingredients: string;
+  how_to_make: string;
+  point: string;
+}
+
+const Menu: React.FC<MenuProps> = ({setResponse,setImgUrl}) => {
   const [options, setOptions] = useState<OptionType[]>([
     { value: "鶏肉", label: "鶏肉"},
     { value: "にんじん", label: "にんじん"},
@@ -33,6 +41,7 @@ const Menu: React.FC<MenuProps> = ({setResponse}) => {
   }
 
   const sendMessage = async () => {
+    
     if (selectedIngredients.length == 0) {
       setResponse(errorMessage);
     } else {
@@ -60,9 +69,38 @@ const Menu: React.FC<MenuProps> = ({setResponse}) => {
 
         const responseContent = response.data.candidates[0].content;
         const responseParts = responseContent.parts.map((part: Part) => part.text).join("\n");
+        const message_list: string[] = responseParts.split("\n**");
+        message_list.forEach((value, index) => {
+          if (index != 0) message_list[index] = "**" + value;
+        });
+        const [title, ingredients, how_to_make, point] = message_list;
+
+        const data: DataType = {
+          title: title,
+          ingredients: ingredients,
+          how_to_make: how_to_make,
+          point: point
+        };
+
+        let img_url_response;
+        try {
+          
+          img_url_response = await axios.post('/recipes/openai', data,{timeout: 100000});
+          // console.log(response.data)
+
+          
+        } catch (error) {
+          console.error("Error in POST:", error);
+        }
+        
+        if (img_url_response != null) {
+          console.log(img_url_response.data)
+          setImgUrl(img_url_response.data);
+        }
+
 
         setResponse(responseParts);
-
+        // getUrlData();
         setIsLoading(false);
       } catch (error) {
         console.error("Google API error:", error);

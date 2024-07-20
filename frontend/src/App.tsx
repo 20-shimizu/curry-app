@@ -18,6 +18,8 @@ type DataType = {
 
 function App() {
   const [response, setResponse] = useState<string>("");
+  const [img_url, setImgUrl] = useState<string>("");
+  console.log(img_url);
   const [selectedRecipe, SetSelectedRecipe] = useState<DataType>({
     id: 10000,
     title: "",
@@ -26,14 +28,13 @@ function App() {
     point: "",
     image_path: ""
   });
-
   return (
     <div>
       <Switch>
         <Route exact path="/">{
           <div>
-            <Menu setResponse={setResponse} />
-            <Chat response={response} />
+            <Menu setResponse={setResponse} setImgUrl={setImgUrl}/>
+            <Chat response={response} img_url={img_url}/>
           </div>}
         </Route>
         <Route exact path="/database">{

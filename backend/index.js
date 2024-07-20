@@ -6,6 +6,7 @@
 //            |          | how_to_make : TEXT
 //            |          | point : TEXT
 
+const OpenAI = require("openai")
 const express = require('express');
 const mysql = require('mysql2');
 const dotenv = require('dotenv');
@@ -16,6 +17,10 @@ const port = 3001;
 app.use(cors());
 app.use(bodyParser.json());
 dotenv.config();
+const openai = new OpenAI(process.env.OPENAI_API_KEY);
+const fs = require('fs');
+const path = require('path');
+
 
 const client = mysql.createConnection({
     connectionLimit: 10,
@@ -80,6 +85,54 @@ app.delete('/recipes/delete', (req,res) => {
         });
     });
 });
+
+// 画像生成
+app.post("/recipes/openai",async(req,res) => {
+    console.log(req.body);
+    const img_text = "以下のタイトルのおいしそうなカレーライスの写真を作ってください\n" + req.body.title+ "テキストは少なめにしてください"
+    // const img_text = "おいしいカレーライス"
+
+    async function generateImage(img_text) {
+        const img_Response = await openai.images.generate({
+            model: "dall-e-3",
+            prompt: img_text,
+            n: 1,
+            size: "1024x1024",
+            quality: "standard"
+        });
+        return img_Response;
+    }
+
+    try {
+        const img_Response = await generateImage(img_text);
+        console.log(img_Response);
+        const img_url = img_Response.data[0].url;
+        // setResponseParts(responseParts + `\n\n![カレーライスの画像](${img_url})`);
+        res.send(img_url);
+        console.log("Image generated successfully");
+    }
+    catch (error) {
+        console.error("Error generating image:", error);
+    }
+
+})
+
+app.post("/recipes/download", async(req,res) => {
+        
+    const response = await app.get(req.body.img_url, {
+        responseType: "blob",
+    });
+    const currentDirectory = process.cwd();
+    console.log(currentDirectory);
+    const fileName = src.substring(src.lastIndexOf("/") + 1);
+    fs.writeFile(path.resolve(img_url), response, (err) => {
+        if (err) {
+        console.error('Error while saving the file:', err);
+        } else {
+        console.log('File saved successfully');
+        }
+    })}
+)
 
 app.listen(port, () => {
     console.log(`listening on *:${port}`);
