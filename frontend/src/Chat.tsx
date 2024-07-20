@@ -45,6 +45,7 @@ const Chat: React.FC<ChatProps> = ({response}) => {
 
   return (
     <div>
+      <button onClick={addRecipe}>レシピ保存</button>
       <div className="chat-container">
       <div className="chat-content">{response[0] == '*' ? <ReactMarkdown>{response}</ReactMarkdown> : response}</div>
       </div>
