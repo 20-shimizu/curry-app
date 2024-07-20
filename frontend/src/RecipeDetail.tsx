@@ -24,7 +24,7 @@ const RecipeDetail: React.FC<RecipeProps> = ({selectedRecipe}) => {
       <Link to="/database"><button className="button">戻る</button></Link>
     </div>
     <div className="imagebox">
-      <img src={`${process.env.PUBLIC_URL}/vbk.png`} alt="カレー" className="recipe-image" />
+      <img src={selectedRecipe.image_path} alt="カレー" className="recipe-image" />
     </div>
     <div>
       <ReactMarkdown>{recipe}</ReactMarkdown>

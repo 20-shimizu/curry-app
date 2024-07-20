@@ -52,6 +52,7 @@ const Menu: React.FC<MenuProps> = ({setResponse,setImgUrl}) => {
       })
       order = order + output_order + "\n";
       setResponse("レシピを考え中...");
+      setImgUrl("");
       setIsLoading(true);
       try {
         const response = await axios.post(
@@ -135,6 +136,11 @@ const Menu: React.FC<MenuProps> = ({setResponse,setImgUrl}) => {
     )
   }
 
+  const resetState = () => {
+    setResponse("");
+    setImgUrl("");
+  }
+
   return (
     <div className="container">
       <button className="recipe-button">レシピを検索</button>
@@ -153,7 +159,7 @@ const Menu: React.FC<MenuProps> = ({setResponse,setImgUrl}) => {
         />
       </div>
       <button onClick={addOptions} className="add-button">追加</button>
-      <Link to="/database" style={{height: '20px'}}><button className="add-button" onClick={() => setResponse("")}>レシピ帳</button></Link>
+      <Link to="/database" style={{height: '20px'}}><button className="add-button" onClick={() => resetState()}>レシピ帳</button></Link>
     </div>
   );
 };

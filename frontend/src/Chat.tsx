@@ -28,8 +28,6 @@ const Chat: React.FC<ChatProps> = ({response,img_url}) => {
 
   //title: タイトル, ingredients: 材料, how_to_make: 作り方, point: ポイント
   const [title, ingredients, how_to_make, point] = message_list;
-  //image_path: 画像の保存先のパス
-  const image_path = "image_path";
 
 
 const toggleSaveRecipe = async () => {
@@ -38,7 +36,7 @@ const toggleSaveRecipe = async () => {
       ingredients: ingredients,
       how_to_make: how_to_make,
       point: point,
-      image_path: image_path
+      image_path: img_url
     };
     if (response[0] == "*") {
       try {
@@ -48,7 +46,7 @@ const toggleSaveRecipe = async () => {
           console.log("Recipe removed");
         } else {
           // download_image();
-          // await axios.post('/recipes/add', data);
+          await axios.post('/recipes/add', data);
           setIsSaved(true);
           console.log("Recipe added");
         }
@@ -70,20 +68,15 @@ const toggleSaveRecipe = async () => {
     setIsSaved(false);
   }, [response]);
 
-  
-
-  console.log(img_url)
-
   return (
     <div>
-      
       <div className="chat-container">
       {/* <button className={`heart-button ${isSaved ? 'saved' : ''}`} onClick={toggleSaveRecipe}>❤️</button> */}
       <div className="button-container">
       <button className={isSaved?"red-heart":"white-heart"} onClick={toggleSaveRecipe}/>
       </div>
       <div className="chat-content">
-        <img src={img_url} alt="recipe" width="1000" height="700"/>
+        {img_url.length > 0 ? <img src={img_url} width="1000" height="700"/>: null}
         {response[0] === '*' ? <ReactMarkdown>{response}</ReactMarkdown> : response}
       </div>
       </div>

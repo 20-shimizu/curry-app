@@ -61,7 +61,7 @@ const Recipes: React.FC<RecipesProps> = ({setSelectedRecipe}) => {
       <div className="recipe-list">
         {dataList.map(data => (
           <div key={data.id} className="recipe-item">
-            <img src={`${process.env.PUBLIC_URL}/vbk.png`} alt="カレー" className="recipe-image" />
+            <img src={data.image_path} alt="カレー" className="recipe-image" />
             <ReactMarkdown className="recipe-title">{data.title}</ReactMarkdown>
             <button onClick={() => deleteData(data.id)} className="delete-button">削除</button>
             <Link to="/recipe"><button onClick={() => setSelectedRecipe(data)} className="delete-button">詳細</button></Link>

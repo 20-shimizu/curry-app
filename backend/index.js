@@ -18,7 +18,7 @@ const port = 3001;
 app.use(cors());
 app.use(bodyParser.json());
 dotenv.config();
-const openai = new OpenAI(process.env.OPENAI_API_KEY);
+const openai = new OpenAI({apiKey:process.env.REACT_APP_OPENAI_API_KEY});
 const fs = require('fs');
 const path = require('path');
 
