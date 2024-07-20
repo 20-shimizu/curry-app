@@ -20,9 +20,15 @@ const RecipeDetail: React.FC<RecipeProps> = ({selectedRecipe}) => {
   const recipe = selectedRecipe.title + "\n" + selectedRecipe.ingredients + "\n" + selectedRecipe.how_to_make + "\n" + selectedRecipe.point;
   return (
     <div>
-      <Link to="/database"><button>戻る</button></Link>
+    <div>
+      <Link to="/database"><button className="button">戻る</button></Link>
+    </div>
+    <div className="imagebox">
       <img src={`${process.env.PUBLIC_URL}/vbk.png`} alt="カレー" className="recipe-image" />
+    </div>
+    <div>
       <ReactMarkdown>{recipe}</ReactMarkdown>
+    </div>
     </div>
   )
 };

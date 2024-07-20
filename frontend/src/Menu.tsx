@@ -115,7 +115,7 @@ const Menu: React.FC<MenuProps> = ({setResponse}) => {
         />
       </div>
       <button onClick={addOptions} className="add-button">追加</button>
-      <Link to="/database" style={{height: '20px'}}><button className="add-button">レシピ帳</button></Link>
+      <Link to="/database" style={{height: '20px'}}><button className="add-button">レシピ帳 </button></Link>
     </div>
   );
 };
