@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import ReactMarkdown from "react-markdown";
+import { Link } from "react-router-dom";
 import "./Recipes.css"
 import axios from "axios";
 
@@ -47,7 +48,10 @@ const Recipes = () => {
 
   return (
     <div className="recipes">
-      <h3>保存済みレシピ</h3>
+      <div className="list">
+        <h3>保存済みレシピ</h3>
+        <Link to="/"><button>レシピ検索</button></Link>
+      </div>
       <div>{dataList.map(data =>
         <div key={data.id} className="list">
           <ReactMarkdown>{data.title}</ReactMarkdown>

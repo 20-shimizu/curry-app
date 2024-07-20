@@ -16,6 +16,8 @@
 - ```npm install dotenv```
 - ```npm install body-parser```
 - ```npm install cors```
+- ```npm install react-router-dom@5.2.0```
+- ```npm install --save-dev @types/react-router-dom```
 - .envファイルを作成し、　```DB_PASSWORD={mysql password}```　を追加 ( {mysql password} にはmysqlに登録したパスワードを入れる)
   - 例:```DB_PASSWORD=ABCDEFG```
 ### curry-app/frontend/での操作

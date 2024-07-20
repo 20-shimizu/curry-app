@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import "./Menu.css"
 import Select, { components, OptionProps } from "react-select";
+import { Link } from "react-router-dom"
 import axios from "axios";
 
 type MenuProps = {
@@ -114,6 +115,7 @@ const Menu: React.FC<MenuProps> = ({setResponse}) => {
         />
       </div>
       <button onClick={addOptions} className="add-button">追加</button>
+      <Link to="/database"><button>レシピ帳</button></Link>
     </div>
   );
 };
