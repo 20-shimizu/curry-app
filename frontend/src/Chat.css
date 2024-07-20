@@ -22,7 +22,27 @@
     color: white;
     margin-top: 10px;
   }
-  
-  .heart-button.saved {
-    color: red;
-  }
+.heart-button.saved {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: red;
+  margin-top: 10px;
+}
+.red-heart {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: red;
+  margin-top: 10px;
+}
+.white-heart {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+  margin-top: 10px;
+}

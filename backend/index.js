@@ -51,18 +51,22 @@ app.post('/recipes/add', (req,res) => {
     const ingredients = req.body.ingredients;
     const how_to_make = req.body.how_to_make;
     const point = req.body.point;
-    client.query('insert into recipes(title, ingredients, how_to_make, point) values(?, ?, ?, ?)', [title, ingredients, how_to_make, point], (err) => {
+    client.query('insert into recipes(title, ingredients, how_to_make, point) values(?, ?, ?, ?)', [title, ingredients, how_to_make, point], (err, result) => {
         if (err) {
             console.error('add error into recipe table');
             throw err;
         }
+        res.send(result)
     });
 });
 
 // レシピ削除
 app.delete('/recipes/delete', (req,res) => {
     const id = req.body.id;
-    client.query('delete from recipes where id = ?', [id], (err) => {
+    let request = '';
+    if (id == 0) request = 'delete from recipes order by id desc limit 1';
+    else request = `delete from recipes where id = ${id}`;
+    client.query(request, (err) => {
         if (err) {
             console.error('delete error from recipe table');
             throw err;
